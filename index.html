@@ -1081,8 +1081,18 @@
   let mainRow = document.getElementsByClassName("row");
 
   for(book of books) {
+    //  let newElem = appendElements(book.title, book.imageLink, book.link);
+    //  mainRow[0].insertAdjacentHTML('beforeend', newElem);
+  }
+
+
+
+  for(i=0; i < books.length; i++)
+  {
+      let book = books[i];
       let newElem = appendElements(book.title, book.imageLink, book.link);
       mainRow[0].insertAdjacentHTML('beforeend', newElem);
+
   }
 
 
@@ -1105,7 +1115,7 @@
   }
 
 
-  console.log(books.country);
+
 
 </script>
 </body>

@@ -1092,11 +1092,66 @@
   {
       let book = books[i];
       let newElem = appendElements(book.title, book.imageLink, book.link);
-      mainRow[0].insertAdjacentHTML('beforeend', newElem);
+   //   mainRow[0].insertAdjacentHTML('beforeend', newElem);
 
   }
 
 
+
+
+let j = 0;
+
+  while(j<books.length)
+  {
+      let book = books[j];
+      if(book.title === "Fairy tales") {
+          break;
+      }
+      let newElem = appendElements(book.title, book.imageLink, book.link);
+      mainRow[0].insertAdjacentHTML('beforeend', newElem);
+      j++;
+  }
+
+  do {
+      console.log(books[j].title);
+      j++;
+  } while(j<books.length);
+
+
+
+  let day = "Tuesday";
+
+
+  switch (day) {
+      case "Saturday":
+          console.log("Deneska e Sabota");
+          break;
+      case "Sunday":
+          console.log("Deneska e Nedela");
+          break;
+      default:
+          console.log("Deneska e Petok");
+  }
+
+
+  let color = "blue";
+
+  switch (color) {
+      case "blue":
+          console.log("Bojata e plava");
+          break;
+      case "red":
+          console.log("Bojata e crvena");
+          break;
+      case "black":
+          console.log("Bojata e crna");
+          break;
+      case "yellow":
+          console.log("Bojata e zolta");
+          break;
+      default:
+          console.log("Bojata e nedefinirana");
+  }
 
 
   function appendElements(title, imageLink, link)
@@ -1114,6 +1169,8 @@
           </div>
       </div>`;
   }
+
+
 
 
 

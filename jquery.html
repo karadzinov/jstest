@@ -83,6 +83,7 @@
         </tbody>
     </table>
 
+    <div id="result"></div>
 
 </div>
 
@@ -98,7 +99,13 @@
 <script>
     $(document).ready(function () {
 
+
+
+
         $("#register").on("submit", function (e) {
+
+
+
 
             e.preventDefault();
 
@@ -122,12 +129,12 @@
                 agree: agree
             }
 
-
             $.ajax({
                 url: "/process.php",
                 method: "post",
                 data: sendData,
                 success: function (data) {
+                    console.log(data);
                     createTable(data);
                     $("#register").trigger("reset");
                 },
@@ -155,8 +162,11 @@
             console.log(weather);
 
             let elDiv = document.createElement("div");
+
+            let weatherIcon = `<img src="${weather.current.condition.icon}" alt="${weather.location.name}" />`;
             elDiv.innerText = weather.current.temp_c + " C е моменталната температура во градот " + weather.location.name;
 
+            $("#weather").append(weatherIcon);
             $("#weather").append(elDiv);
         }
 
@@ -178,16 +188,12 @@
             console.log(user);
 
             let table = `
-
-                     <tr>
+                    <tr>
                         <td>${user.email}</td>
                         <td>${user.address}</td>
                         <td>${user.city}</td>
                         <td>${user.state}</td>
-                     </tr>
-
-
-       `;
+                     </tr>`;
 
 
             $("#users").append(table);

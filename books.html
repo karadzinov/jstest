@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/custom.css">
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div id="root"></div>
+
+
+<div class="container">
+    <div class="row">
+            <div class="martin" data-text="Bla bla">Martin</div>
+    </div>
+</div>
+
+
+<script>
+    let root = document.getElementById("root");
+
+    console.log(root);
+
+    let ulList;
+    let liElm1;
+    let liElm2;
+    let liElm3;
+
+    ulList = document.createElement("ul"); // <ul></ul>
+
+    liElm1 = document.createElement("li"); // <li><li>
+    liElm1.textContent = "Task 1";
+
+    liElm2 = document.createElement("li");
+    liElm2.classList.add("custom-class");
+    liElm2.textContent = "Task 2";
+
+    liElm3 = document.createElement("li");
+    liElm3.textContent = "Task 3";
+
+    ulList.append(liElm1);
+    ulList.append(liElm2);
+    ulList.append(liElm3);
+
+    root.append(ulList); // <ul><li></li></ul>
+
+
+
+    $.ajax({
+        url: "newbooks.json",
+        method: "GET",
+        success: function(data) {
+           processBooks(data);
+           cardClick();
+        },
+        error: function(e) {
+            console.log(e.textContent);
+        }
+    })
+
+
+    let martin = $.find(".martin")[0];
+    console.log($(martin).attr('data-text'));
+
+
+    function cardClick()
+    {
+
+
+
+
+        $(".image-card").on("click", function() {
+
+            let card = $(this).parent().parent();
+
+           let image =  $(this).attr("style");
+
+           image = image.split("'");
+
+           console.log(image);
+
+           image =  "/"+image[1];
+
+
+           let result = {
+               title: $(card.children()[0]).text(),
+               image: image
+           }
+           console.log(result);
+        });
+    }
+
+
+    let mainRow = $(".row")[0];
+
+    function processBooks(books)  {
+        for(book of books) {
+              let newElem = appendElements(book.title, book.imageLink, book.link);
+              mainRow.insertAdjacentHTML('beforeend', newElem);
+        }
+    }
+
+
+
+
+    function appendElements(title, imageLink, link)
+    {
+        return `<div class="col-md-3">
+          <div class="card">
+              <div class="card-header">${title}</div>
+              <div class="card-body">
+                  <div class="image-card" style="background-image: url('${imageLink}')"></div>
+              </div>
+
+          </div>
+          <div class="card-footer">
+              <a href="${link}" class="btn btn-info" type="button"> <span class="glyphicon glyphicon glyphicon-credit-card" aria-hidden="true"></span> Add to cart</a>
+          </div>
+      </div>`;
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>
